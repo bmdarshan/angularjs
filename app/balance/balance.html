@@ -1,0 +1,18 @@
+<div data-ng-controller="balanceController">
+  <h1>Balances</h1>
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Description</th>   
+      <th>Amount</th>
+      <th>Category</th>
+    </tr>
+    <tr ng-repeat="expense in expenses">
+      <td>{{expense.date}}</td>
+      <td>{{expense.description}}</td>    
+      <td>{{expense.amount}}</td>
+      <td>{{expense.category}}</td>
+    </tr>
+  </table>
+  <button type="button" class="btn btn-primary btn-lg" ng-click="addExpense()">Add Expense</button>
+</div>

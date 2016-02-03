@@ -1,0 +1,32 @@
+<div data-ng-controller="expenseController">
+  <button type="button" class="btn btn-primary btn-lg" ng-click="routeToBalance()">Back to Balance Sheet</button>
+  <h1>Expenses</h1>
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="expenseDate">Date</label>
+      <input type="date" class="form-control" id="expenseDate" placeholder="date" ng-model="expense.date">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseDescription">Description</label>
+      <input type="text" class="form-control" id="expenseDescription" placeholder="Description" ng-model="expense.description">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseAmount">Amount</label>
+      <input type="number" class="form-control" id="expenseAmount" placeholder="Amount" ng-model="expense.amount">
+    </div>
+
+    <div class="form-group">
+      <select name="select" ng-model="expense.category">
+        <option value="" disabled selected>Category</option>
+        <option value="gas">Gas</option>
+        <option value="grocery">Grocery</option>
+        <option value="emi">EMI</option>
+        <option value="rent">Rent</option>
+        <option value="restaurant">Restaurant</option>
+      </select>
+    </div>
+    <input type="submit" class="btn btn-primary btn-lg" ng-click="update(expense)" value="Save" />
+  </form>
+</div>

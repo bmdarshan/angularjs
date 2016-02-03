@@ -10,12 +10,19 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+  <script src="app.js"></script>
+  <script src="balance/balanceController.js"></script>
+  <script src="expense/expenseController.js"></script>
 </head>
-<body>
+<body data-ng-app="accountingApp">
 
-  <div class="view-container">
-    <div ng-view class="view-frame"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div ng-view></div>
+      </div>
+    </div>
   </div>
-
 </body>
 </html>

@@ -8,14 +8,11 @@ var morgan = require('morgan');             // log requests to the console (expr
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
-// fixture for initial collection
-// var fixture = [{_id:1, firstName: 'Darshan',lastName: 'Bilagunda Mukunda',age: 26},{_id:2, firstName: 'Mukunda',lastName: 'Bilagunda Hanumegowda',age: 55},{_id:3, firstName: 'Prathiba',lastName: 'Giriyappa',age: 45},{_id:4, firstName: 'Sahana',lastName: 'Bilagunda Mukunda',age: 25}];
-
 // configuration =================
 
-mongoose.connect('mongodb://username:password@ds043062.mongolab.com:43062/dbName');     // connect to mongoDB database on mongolab cloud
+mongoose.connect('mongodb://bmdarshan:369hmbdarshanppg@ds043062.mongolab.com:43062/angularjsbmdarshan');     // connect to mongoDB database on mongolab cloud
 
-app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/app'));                    // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
@@ -29,37 +26,32 @@ db.once('open', function() {
 });
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(9000);
+console.log("App listening on port 9000");
 
-var NameSchema = new mongoose.Schema({
-  _id: Number,
-  firstName: String,
-  lastName: String,
-  age: Number,
+var ExpenseSchema = new mongoose.Schema({
+  date: String,
+  description: String,
+  category: String,
+  amount: Number
 });
 
-var Name = mongoose.model('Name', NameSchema);
+var Expense = mongoose.model('Expense', ExpenseSchema);
 
-// Name.collection.insert(fixture, function (err, docs) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.info('Collection inserted succesfully');
-//   }
-// });
+app.get('/', function(req, res) {
+  res.sendfile('app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+});
 
-
-app.get('/api/names', function (req, res, next) {
-  Name.find(function(err, name){
+app.get('/api/expenses', function (req, res, next) {
+  Expense.find(function(err, name){
     if(err) res.send(err);
     res.json(name);
   });
 });
 
-app.get('/api/name/:id', function (req, res, next) {
-  Name.findById(req.params.id, function (err, data) {
+app.post('/api/expense', function (req, res, next) {
+  Expense.create(req.body, function (err, post) {
     if (err) return next(err);
-    res.json(data);
+    res.json(post);
   });
 });
