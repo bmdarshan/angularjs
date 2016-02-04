@@ -8,6 +8,11 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');    
 var methodOverride = require('method-override'); 
 
+
+//Database connection. Connect to your mongodb. 
+
+mongoose.connect('dbUrl');
+
 // configuration =================
 
 
