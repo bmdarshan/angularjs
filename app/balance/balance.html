@@ -8,9 +8,9 @@
       <th>Category</th>
     </tr>
     <tr ng-repeat="expense in expenses">
-      <td>{{expense.date}}</td>
+      <td>{{expense.date | date:'shortDate'}}</td>
       <td>{{expense.description}}</td>    
-      <td>{{expense.amount}}</td>
+      <td>{{expense.amount | currency}}</td>
       <td>{{expense.category}}</td>
     </tr>
   </table>
