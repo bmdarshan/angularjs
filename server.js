@@ -2,24 +2,23 @@
 
 // set up ========================
 var express  = require('express');
-var app      = express();                               
-var mongoose = require('mongoose');                     
-var morgan = require('morgan');             
-var bodyParser = require('body-parser');    
-var methodOverride = require('method-override'); 
+var app      = express();
+var mongoose = require('mongoose');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 
-//Database connection. Connect to your mongodb. 
+//Database connection. Connect to your mongodb.
 
-mongoose.connect('dbUrl');
 
 // configuration =================
 
 
-app.use(express.static(__dirname + '/app'));                    
-app.use(morgan('dev'));                                         
-app.use(bodyParser.urlencoded({'extended':'true'}));            
-app.use(bodyParser.json());                                    
+app.use(express.static(__dirname + '/app'));
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({'extended':'true'}));
+app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
@@ -56,5 +55,14 @@ app.post('/api/expense', function (req, res, next) {
   Expense.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
+  });
+});
+
+app.delete('/api/expense/:id', function (req, res) {
+  var id = req.param('id');
+  console.log(id);
+  Expense.findByIdAndRemove(id, function(err, data){
+    if(err) res.send(err);
+    res.json(data);
   });
 });
